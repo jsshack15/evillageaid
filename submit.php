@@ -13,10 +13,10 @@
   header('Location: ' . $home_url);
   }
   if (isset($_SESSION['usermain'])) {
-    echo '&#10084; <a href="logoutmain.php">Log Out (' . $_SESSION['usermain'] . ')</a><br/>';
+
   }
 $id = $_GET['id'];
-echo "<b>Patient ID: </b>".$id;
+
 $dbc = mysqli_connect('localhost','root','','healthcare')
 or
 die('error connecting to MySql server');
@@ -25,15 +25,16 @@ $result = mysqli_query($dbc,$query)
 or
 die('Error querying to mysql server');
 while ($row = mysqli_fetch_array($result)) { 
-echo '<br>';
-echo "<b>Patient Name: </b>".$row['p_name'].'<br>';
- echo "<b>Patient Reports: </b>".'<a href="' . 'files/' . $row['p_file'] . '" target="_blank" />view file</a></p>'.'<br>';
-echo "<b>Patient's Primary Hospital: </b>".$row['ph_name'].'<br>';
+
+ 
+
  if (isset($_POST['submit'])) {
 	  $sreport = $_FILES['sreport']['name'];
     $sreport_type = $_FILES['sreport']['type'];
     $sreport_size = $_FILES['sreport']['size'];
 	$comment=$_POST['comment'];
+	$dname=$_POST['usr'];
+	$ddept=$_POST['dr'];
 	 if (!empty($sreport)) {
      
         if ($_FILES['sreport']['error'] == 0) {
@@ -44,14 +45,12 @@ echo "<b>Patient's Primary Hospital: </b>".$row['ph_name'].'<br>';
            
 
             // Write the data to the database
-            $query1 = "UPDATE patient_file SET sreport='$sreport',comment='$comment', status='Active', timestamp=NOW() WHERE p_id='$id'";
+            $query1 = "UPDATE patient_file SET sreport='$sreport',status='Active',comment='$comment',d_name='$dname',ddept='$ddept',timestamp=NOW() WHERE p_id='$id' ";
             mysqli_query($dbc, $query1);
 
             // Confirm success with the user
-           echo "Your file is delivered to the required hospital <BR>";
-            echo '<a href="' . 'mfiles/' . $sreport . '" target="_blank" />view your uploaded file</a></p>';
-             
-
+           
+            echo "Information is shared with the primary hospital";
             // Clear the score data to clear the form
     
             $sreport = "";
@@ -78,42 +77,83 @@ echo "<b>Patient's Primary Hospital: </b>".$row['ph_name'].'<br>';
 
  </head>
 
+ <style>
+body {
+    background-color: #CCCCCC;
+}
+.sessioncolor{
+  color: #009688;
+  font-weight: bolder;
+  padding: 2%;
+  margin:2%;
+}
+.text{
+  margin:2%;
+  padding:2%;
+}
+.w3-container {
+    padding: 0px;
+    background-color:white;
+    padding: 1px;
+}
+a.pull-right {
+    padding: 2%;
+}
+button#submit{
+  padding: 2%;
+  margin:3%;
+}
+label{
+  padding: 2%;
+  margin:2%;
+}
+  </style>
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Page 1</a></li>
+        <li><a href="#">Page 2</a></li> 
+        <li><?php echo ' <a href="logout.php">Log Out</a><span class="sessioncolor">(' . $_SESSION['usermain'] . ')</span><br/>';
+  ?></li> 
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <form   role=" form" enctype="multipart/form-data" method="post" action="">
- 
- 
-</form>
-
-
-<form   role=" form" enctype="multipart/form-data" method="post" action="">
-<header class="w3-container w3-red">
-<h1>Header</h1>
+  <div class="col-md-offset-3 col-md-6 w3-container">
+<header class="w3-container w3-teal">
+<h3 class="text-center ">Patient Details</h3>
 </header>
 
 
 
-<div class="w3-container">
 
 <table class="w3-table w3-bordered w3-striped">
 <thead>
 <tr>
   <th>Patient Name</th>
   <th>Patient Id</th>
-  <th>Patient Report</th>
+  <th> View Patient Report</th>
 </tr>
 </thead>
 <tbody>
 <tr>
   <td><?php echo $row['p_name'];?></td>
-  <td>Smith</td>
-  <td>50</td>
+  <td><?php echo $row['ph_name'];?></td>
+  <td><?php echo '<a href="' . 'files/' . $row['p_file'] . '" target="_blank" />view file</a>';?> </td>
+  
 </tr>
 
 </tr>
 </tbody>
 </table>
 
-</div>
 
 <div class="w3-row-padding w3-margin-top">
 
@@ -121,34 +161,43 @@ echo "<b>Patient's Primary Hospital: </b>".$row['ph_name'].'<br>';
  
    
     
-<h4>Advice Patient:</h4> <center><textarea name="comment" rows="5" cols="80"><?php echo "Enter suggestions......";?></textarea></center>
+<h4>Advice Patient:</h4> <center><textarea name="comment" rows="5" ></textarea></center>
 
 
 </div>
-
-<div class="w3-half">
-  <div class="w3-card-2">
-
+<div class=" col-md-12 col-xs-12 col-sm-12 w3-full">
+ 
    
-  </div>
+    
+<div class="form-group">
+  <label for="usr"><h4>Doctor's Name:</h4></label>
+  <input type="text" class="form-control" id="usr" name="usr">
+</div>
+<div class="form-group">
+  <label for="dr"><h4>Doctor's Department:</h4></label>
+  <input type="text" class="form-control" id="dr" name="dr">
 </div>
 
 </div>
 
-<footer class="w3-container w3-red w3-margin-top">
- <div class="w3-container">
+
+</div>
+
+<footer class="w3-container w3-teal w3-margin-top">
+
 
   <label for="sreport">UPLOAD:<input type="file" name="sreport" id="sreport"></label>
 
-
-    </div>
-    <button class="btn btn-sucess" name="submit" id="submit">Submit</button>
+    <button class="pull-right btn btn-sucess" name="submit" id="submit">Submit</button>
 
 </footer>
+
 <?php
 }
 mysqli_close($dbc);
 ?>
+
+</div>
 </form>
 </body>
 </html> 
