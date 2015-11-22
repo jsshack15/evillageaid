@@ -1,4 +1,6 @@
 <?php
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
 session_start();
 
   // If the session vars aren't set, try to set them with a cookie
@@ -136,7 +138,7 @@ echo '<br>';
 
 <footer class="w3-container w3-teal w3-margin-top">
  
- <p><?php echo '<a  type="button" class="pull-right" href="' . 'files/' . $row['sreport'] . '" target="_blank" /><h4>View File</h4></a></p>'.'<br>';?></hr ></p>
+ <p><?php echo '<a  type="button" class="pull-right" href="' . 'mfiles/' . $row['sreport'] . '" target="_blank" /><h4>View File</h4></a></p>'.'<br>';?></hr ></p>
 </footer><?php
 
 ?></div><?php
