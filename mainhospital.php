@@ -19,9 +19,15 @@
 	<title>Main page</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <script type="text/javascript" src="js/angular.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="mainhospitalcontroller.js"></script>
+
 </head>
   <style>
+  body{
+font-family: 'Montserrat', sans-serif;
+}
+
  .box-shadow{
   box-shadow:0 0 10px 0 rgba(0,0,0,.40);
   height:auto;
@@ -34,7 +40,7 @@
  }
   </style>
 <body ng-controller="mainhospitalcontroller">
-  <nav class="navbar navbar-default">
+ <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">WebSiteName</a>
@@ -52,7 +58,7 @@ if (isset($_SESSION['usermain'])) {
       </ul>
     </div>
   </div>
-
+</nav>
 <div class="row">
 <div class="col-md-offset-3 col-md-6">
 <form   role=" form" enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">

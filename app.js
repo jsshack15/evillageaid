@@ -1,5 +1,6 @@
-var health=angular.module('health',[])
+var health=angular.module('health',['angular-loading-bar'])
 health.controller('healthcontroller',function($scope,$http){
+  
 	 setTimeout(function(){
   $http.get("http://localhost/hospitalp/tojson.php")
   .success(function (data) {
@@ -25,6 +26,6 @@ health.controller('healthcontroller',function($scope,$http){
   }
   
    });
-},5000);
+},1000);
 
 })
