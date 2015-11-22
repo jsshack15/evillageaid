@@ -74,13 +74,18 @@ while ($row = mysqli_fetch_array($result)) {
  <head>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="w3.css">
-
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.backstretch.min.js"></script>
  </head>
 
  <style>
 body {
     background-color: #CCCCCC;
+    font-family: 'Montserrat', sans-serif;
 }
+.w3-container
+{background-color:rgba(255, 255, 255, 0.49);}
 .sessioncolor{
   color: #009688;
   font-weight: bolder;
@@ -199,5 +204,16 @@ mysqli_close($dbc);
 
 </div>
 </form>
+<script>
+ $.backstretch([
+      "HOSPITALHEART_1stblue.jpg",
+      "HOSPITALHEART1_midblue.jpg",
+      "HOSPITALHEART1_lastblue.jpg"    
+      ], {
+        fade: 1050,
+        duration: 500
+    });
+
+</script>
 </body>
 </html> 
