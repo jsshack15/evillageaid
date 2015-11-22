@@ -49,12 +49,25 @@
 	   header('Location: ' . $home_url);
   }
 ?>
+<style>
+form.ng-pristine.ng-valid {
+    background-color: #F1F1F1;
+    padding: 4%;
+    margin: 12%;
+    background-color:rgba(70, 49, 49, 0.06);
+}
+body{
+font-family: 'Montserrat', sans-serif;
+}
 
+</style>
 <html >
 <head>
 	<title>Main page</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <script type="text/javascript" src="backsketch.js/jquery.backsketch.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <?php
@@ -67,15 +80,15 @@
 <div class="col-md-offset-3 col-md-6">
 <form role=" form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
   <div class="form-group">
-    <label for="login"><h4>Login-Main</h4></label>
+    <label class="text-center city" for="login"><h3><b>Login-City</b></h3></label>
    
   </div>
-  <div class="form-group">
-    <label for="mainid">City Hospital Name</label>
-    <select class="form-control"  id="mainid" name="mainid">
+  <div class="text-center form-group">
+    <label for="mainid" class="hs"></label>
+    <select class="form-control"   id="mainid" name="mainid">
     <option ng-repeat="hospital in data" value="{{hospital.usermain}}">{{hospital.usermain}}</option>
     </select>
-     <label for="mainpass">Password</label><input type="password" class="form-control" name="mainpass" id="mainpass">
+     <label for="mainpass" ></label><input type="password" placeholder="password" class="form-control" name="mainpass" id="mainpass">
      
   </div>
   <div>
