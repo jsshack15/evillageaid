@@ -34,11 +34,7 @@ body {
   margin:2%;
   padding:2%;
 }
-.w3-container {
-    padding: 0px;
-    background-color:white;
-    padding: 1px;
-}
+
 a.pull-right {
     padding: 2%;
 }
@@ -109,7 +105,7 @@ echo '<br>';
 <tr>
   <td><?php echo $id;?></td>
   <td><?php echo $row['p_name'] ?></td>
-  <td></td>
+  <td><?php echo $row['disease'] ?></td>
 </tr>
 
 </tbody>
@@ -124,13 +120,15 @@ echo '<br>';
 
 <div class="text w3-full">
   <div class="w3-card-2">
-    <div class="text-center w3-full">
-     <h4>Doctor's Advice</h4>
+    <div style="padding:1%"class="text-center w3-full">
+     <h3>Doctor's Advice</h3>
      <hr>
     </div>
     <div class="w3-container">
 <p><?php echo  $row['comment'].'<br>';?> </p>
+   <p>--<?php echo  $row['d_name']."(". $row['ddept'].")";?></p>
     </div>
+
   </div>
 </div>
 

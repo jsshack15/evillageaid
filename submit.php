@@ -100,7 +100,7 @@ body {
 }
 .w3-container {
     padding: 0px;
-    background-color:white;
+    background-color:rgba(255, 255, 255, 0.76);
     padding: 1px;
 }
 a.pull-right {
